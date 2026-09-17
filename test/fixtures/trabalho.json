@@ -1,0 +1,15 @@
+[
+  {
+    "aluno": {
+      "nome": "Aluno Teste Trabalho",
+      "emailPrefix": "aluno.teste.trabalho",
+      "matriculaPrefix": "2026",
+      "senha": "123456"
+    },
+    "trabalho": {
+      "disciplinaId": "disciplina-matematica",
+      "titulo": "Trabalho de Automacao",
+      "descricao": "Entrega criada por teste automatizado."
+    }
+  }
+]
