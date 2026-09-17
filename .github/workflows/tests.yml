@@ -9,6 +9,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
+      BASE_URL: http://localhost:3000
+      ADMIN_EMAIL: admin@escola.com
+      ADMIN_SENHA: admin123
 
     services:
       mongodb:
@@ -34,7 +39,18 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
+      - name: Iniciar aplicação
+        run: npm start &
+
+      - name: Aguardar API
+        run: |
+          for tentativa in {1..30}; do
+            if curl --fail --silent http://localhost:3000/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          exit 1
+
       - name: Executar testes
         run: npm test
-        env:
-          MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
